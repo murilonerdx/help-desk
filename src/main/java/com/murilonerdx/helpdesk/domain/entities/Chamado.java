@@ -1,9 +1,8 @@
-package com.murilonerdx.helpdesk.domain.entity;
+package com.murilonerdx.helpdesk.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.murilonerdx.helpdesk.domain.enums.Prioridade;
 import com.murilonerdx.helpdesk.domain.enums.Status;
-import lombok.AllArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;

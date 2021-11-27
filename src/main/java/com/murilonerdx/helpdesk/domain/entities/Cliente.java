@@ -1,7 +1,6 @@
-package com.murilonerdx.helpdesk.domain.entity;
+package com.murilonerdx.helpdesk.domain.entities;
 
 import com.murilonerdx.helpdesk.domain.enums.Perfil;
-import lombok.AllArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
