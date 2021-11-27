@@ -10,6 +10,7 @@ public enum Perfil {
     private Integer code;
     private String description;
 
+
     public Integer getCode() {
         return code;
     }
@@ -22,11 +23,14 @@ public enum Perfil {
         return description;
     }
 
+
+
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public static Perfil toEnum(Integer cod) throws IllegalAccessException {
+    @SneakyThrows
+    public static Perfil toEnum(Perfil cod){
         if (cod == null)
             return null;
 

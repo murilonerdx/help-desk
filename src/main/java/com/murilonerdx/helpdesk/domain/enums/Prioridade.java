@@ -1,6 +1,7 @@
 package com.murilonerdx.helpdesk.domain.enums;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
