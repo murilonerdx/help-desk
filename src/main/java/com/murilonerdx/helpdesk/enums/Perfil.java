@@ -1,4 +1,4 @@
-package com.murilonerdx.helpdesk.domain.enums;
+package com.murilonerdx.helpdesk.enums;
 
 import lombok.*;
 
@@ -30,7 +30,7 @@ public enum Perfil {
     }
 
     @SneakyThrows
-    public static Perfil toEnum(Perfil cod){
+    public static Perfil toEnum(Integer cod){
         if (cod == null)
             return null;
 

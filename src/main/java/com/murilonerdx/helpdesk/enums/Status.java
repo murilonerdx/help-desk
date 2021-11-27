@@ -1,13 +1,12 @@
-package com.murilonerdx.helpdesk.domain.enums;
+package com.murilonerdx.helpdesk.enums;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
 public enum Status {
-    ADMIN(0, "ABERTO"), CLIENTE(1, "ANDAMENTO"), TECNICO(2, "ENCERRADO");
+    ABERTO(0, "ABERTO"), ANDAMENTO(1, "ANDAMENTO"), ENCERRADO(2, "ENCERRADO");
 
     private Integer code;
     private String description;

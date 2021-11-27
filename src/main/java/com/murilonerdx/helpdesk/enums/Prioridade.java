@@ -1,13 +1,12 @@
-package com.murilonerdx.helpdesk.domain.enums;
+package com.murilonerdx.helpdesk.enums;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
 public enum Prioridade {
-    ADMIN(0, "BAIXA"), CLIENTE(1, "MEDIA"), TECNICO(2, "ALTA");
+    BAIXA(0, "BAIXA"), MEDIA(1, "MEDIA"), ALTA(2, "ALTA");
 
     private Integer code;
     private String description;

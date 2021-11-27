@@ -1,15 +1,17 @@
-package com.murilonerdx.helpdesk.domain.entities;
+package com.murilonerdx.helpdesk.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.murilonerdx.helpdesk.domain.enums.Prioridade;
-import com.murilonerdx.helpdesk.domain.enums.Status;
+import com.murilonerdx.helpdesk.enums.Prioridade;
+import com.murilonerdx.helpdesk.enums.Status;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-public abstract class Chamado implements Serializable {
+public class Chamado implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -31,9 +33,8 @@ public abstract class Chamado implements Serializable {
     @JoinColumn(name="cliente_id")
     private Cliente cliente;
 
-    public Chamado(Integer id, LocalDate dataAbertura, Prioridade prioridade, Status status, String titulo, String observacoes, Tecnico tecnico, Cliente cliente) {
+    public Chamado(Integer id, Prioridade prioridade,Status status,String titulo, String observacoes, Tecnico tecnico, Cliente cliente) {
         this.id = id;
-        this.dataAbertura = dataAbertura;
         this.prioridade = prioridade;
         this.status = status;
         this.titulo = titulo;
