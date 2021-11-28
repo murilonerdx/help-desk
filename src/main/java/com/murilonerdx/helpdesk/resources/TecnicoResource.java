@@ -27,8 +27,7 @@ public class TecnicoResource {
 
     @PostMapping()
     public ResponseEntity<Tecnico> create(@RequestBody TecnicoDTO tecnicoDTO){
-        Tecnico tecnico = new Tecnico();
-        BeanUtils.copyProperties(tecnicoDTO, tecnico);
+        Tecnico tecnico = new Tecnico(tecnicoDTO);
 
         Tecnico tecnicoSaved = service.create(tecnico);
         return ResponseEntity.ok().body(tecnicoSaved);
@@ -55,7 +54,7 @@ public class TecnicoResource {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> update(@PathVariable Integer id){
         service.remote(id);
-        
+
         return ResponseEntity.noContent().build();
     }
 }
