@@ -6,6 +6,6 @@ public interface DAOService<O, I> {
     O create(O o);
     O findById(I i);
     List<O> listAll();
-    void remote(I i);
+    void remove(I i);
     O update(O o);
 }

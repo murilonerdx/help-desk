@@ -19,6 +19,8 @@ public class Chamado implements Serializable {
 
     @JsonFormat(pattern="dd/MM/yyyy")
     private LocalDate dataAbertura = LocalDate.now();
+    @JsonFormat(pattern="dd/MM/yyyy")
+    private LocalDate dataFechamento;
 
     private Prioridade prioridade;
     private Status status;
@@ -108,5 +110,13 @@ public class Chamado implements Serializable {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public LocalDate getDataFechamento() {
+        return dataFechamento;
+    }
+
+    public void setDataFechamento(LocalDate dataFechamento) {
+        this.dataFechamento = dataFechamento;
     }
 }

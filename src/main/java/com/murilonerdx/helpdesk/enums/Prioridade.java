@@ -28,11 +28,11 @@ public enum Prioridade {
         this.description = description;
     }
 
-    public static Status toEnum(Integer cod) throws IllegalAccessException {
+    public static Prioridade toEnum(Integer cod) throws IllegalAccessException {
         if (cod == null)
             return null;
 
-        for(Status x: Status.values()){
+        for(Prioridade x: Prioridade.values()){
             if(cod.equals(x.getCode()))
                 return x;
         }

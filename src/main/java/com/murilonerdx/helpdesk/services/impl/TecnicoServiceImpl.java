@@ -43,7 +43,7 @@ public class TecnicoServiceImpl implements DAOService<Tecnico, Integer> {
     }
 
     @Override
-    public void remote(Integer id) {
+    public void remove(Integer id) {
         tecnicoRepository.deleteById(id);
     }
 

@@ -2,12 +2,10 @@ package com.murilonerdx.helpdesk.resources;
 
 
 import com.murilonerdx.helpdesk.dto.ClienteDTO;
-import com.murilonerdx.helpdesk.dto.TecnicoDTO;
 import com.murilonerdx.helpdesk.entities.Cliente;
 import com.murilonerdx.helpdesk.entities.Tecnico;
 import com.murilonerdx.helpdesk.enums.Perfil;
 import com.murilonerdx.helpdesk.services.impl.ClienteServiceImpl;
-import com.murilonerdx.helpdesk.services.impl.TecnicoServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +27,8 @@ public class ClienteResource {
     @GetMapping("/{id}")
     public ResponseEntity<ClienteDTO> findById(@PathVariable Integer id) {
         Cliente tec = service.findById(id);
-
         ClienteDTO clienteDTO = new ClienteDTO(tec);
+
         return ResponseEntity.ok().body(clienteDTO);
     }
 
@@ -45,17 +43,17 @@ public class ClienteResource {
         BeanUtils.copyProperties(clienteDTO, cliente);
 
         Cliente clienteSaved = service.create(cliente);
-        ClienteDTO tecnicoDTOSave = new ClienteDTO(clienteSaved);
+        ClienteDTO clienteDTOSaved = new ClienteDTO(clienteSaved);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(clienteSaved.getId()).toUri();
-        return ResponseEntity.created(uri).body(tecnicoDTOSave);
+        return ResponseEntity.created(uri).body(clienteDTOSaved);
     }
 
     @GetMapping()
     public ResponseEntity<List<ClienteDTO>> findAll() {
-        List<ClienteDTO> tecnicos = service.listAll().stream().map(ClienteDTO::new).collect(Collectors.toList());
+        List<ClienteDTO> clientesDTO = service.listAll().stream().map(ClienteDTO::new).collect(Collectors.toList());
 
-        return ResponseEntity.ok().body(tecnicos);
+        return ResponseEntity.ok().body(clientesDTO);
     }
 
     @PutMapping("/update/{id}")
@@ -72,8 +70,8 @@ public class ClienteResource {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> update(@PathVariable Integer id) {
-        service.remote(id);
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        service.remove(id);
 
         return ResponseEntity.noContent().build();
     }

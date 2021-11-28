@@ -41,7 +41,7 @@ public class ClienteServiceImpl implements DAOService<Cliente, Integer> {
     }
 
     @Override
-    public void remote(Integer id) {
+    public void remove(Integer id) {
         clienteRepository.deleteById(id);
     }
 

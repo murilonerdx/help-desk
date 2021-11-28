@@ -52,9 +52,9 @@ public class TecnicoResource {
 
     @GetMapping()
     public ResponseEntity<List<TecnicoDTO>> findAll() {
-        List<TecnicoDTO> tecnicos = service.listAll().stream().map(TecnicoDTO::new).collect(Collectors.toList());
+        List<TecnicoDTO> tecnicosDTO = service.listAll().stream().map(TecnicoDTO::new).collect(Collectors.toList());
 
-        return ResponseEntity.ok().body(tecnicos);
+        return ResponseEntity.ok().body(tecnicosDTO);
     }
 
     @PutMapping("/update/{id}")
@@ -71,8 +71,8 @@ public class TecnicoResource {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> update(@PathVariable Integer id) {
-        service.remote(id);
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        service.remove(id);
 
         return ResponseEntity.noContent().build();
     }
