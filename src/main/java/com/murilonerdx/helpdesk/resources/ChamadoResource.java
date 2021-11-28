@@ -21,6 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,12 +31,6 @@ public class ChamadoResource {
 
     @Autowired
     private ChamadoServiceImpl chamadoService;
-
-    @Autowired
-    private TecnicoServiceImpl tecnicoService;
-
-    @Autowired
-    private ClienteServiceImpl clienteService;
 
     @GetMapping("/{id}")
     public ResponseEntity<ChamadoDTO> findById(@PathVariable Integer id) {
@@ -48,20 +43,9 @@ public class ChamadoResource {
     @SneakyThrows
     @PostMapping()
     public ResponseEntity<ChamadoDTO> create(@RequestBody @Valid ChamadoDTO chamadoDTO) {
-        Tecnico tecnico = tecnicoService.findById(chamadoDTO.getTecnico());
-        Cliente cliente = clienteService.findById(chamadoDTO.getCliente());
 
-        Chamado chamado = new Chamado();
 
-        chamadoDTO.setId(null);
-        chamado.setCliente(cliente);
-        chamado.setTecnico(tecnico);
-        chamado.setPrioridade(Prioridade.toEnum(chamadoDTO.getPrioridade()));
-        chamado.setStatus(Status.toEnum(chamadoDTO.getStatus()));
-        chamado.setTitulo(chamadoDTO.getTitulo());
-        chamado.setObservacoes(chamadoDTO.getObservacoes());
-
-        Chamado chamadoSaved = chamadoService.create(chamado);
+        Chamado chamadoSaved = chamadoService.create(chamadoDTO);
         ChamadoDTO chamadoDTOSaved = new ChamadoDTO(chamadoSaved);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(chamadoDTOSaved.getId()).toUri();
@@ -75,18 +59,13 @@ public class ChamadoResource {
         return ResponseEntity.ok().body(chamadosDTO);
     }
 
-//    @PutMapping("/update/{id}")
-//    public ResponseEntity<ChamadoDTO> update(@RequestBody ChamadoDTO chamadoDTO, @PathVariable Integer id) {
-//        Chamado chamado = chamadoService.findById(id);
-//
-//        chamado.setEmail(tecnicoDTO.getEmail());
-//        chamado.setNome(tecnicoDTO.getNome());
-//
-//        Chamado chamadoUpdated = chamadoService.update(chamado);
-//        ChamadoDTO chamadoDTOUpdated = new ChamadoDTO(chamadoUpdated);
-//
-//        return ResponseEntity.ok().body(chamadoDTOUpdated);
-//    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ChamadoDTO> update(@RequestBody ChamadoDTO chamadoDTO, @PathVariable Integer id) {
+        Chamado chamadoUpdated = chamadoService.update(id, chamadoDTO);
+        ChamadoDTO chamadoDTOUpdated = new ChamadoDTO(chamadoUpdated);
+
+        return ResponseEntity.ok().body(chamadoDTOUpdated);
+    }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {

@@ -46,9 +46,10 @@ public class ChamadoDTO {
         this.observacoes = chamado.getObservacoes();
         this.tecnico = chamado.getTecnico().getId();
         this.cliente = chamado.getCliente().getId();
+        this.dataFechamento=chamado.getDataFechamento();
     }
 
-    public ChamadoDTO(Integer id, LocalDate dataAbertura, Integer prioridade, Integer status, String titulo, String observacoes, Integer tecnico, Integer cliente) {
+    public ChamadoDTO(Integer id, LocalDate dataAbertura, Integer prioridade, Integer status, String titulo, String observacoes, Integer tecnico, Integer cliente, LocalDate dataFechamento) {
         this.id = id;
         this.dataAbertura = dataAbertura;
         this.prioridade = prioridade;
@@ -57,6 +58,7 @@ public class ChamadoDTO {
         this.observacoes = observacoes;
         this.tecnico = tecnico;
         this.cliente = cliente;
+        this.dataFechamento = dataFechamento;
     }
 
     public Integer getId() {
@@ -121,5 +123,13 @@ public class ChamadoDTO {
 
     public void setCliente(Integer cliente) {
         this.cliente = cliente;
+    }
+
+    public LocalDate getDataFechamento() {
+        return dataFechamento;
+    }
+
+    public void setDataFechamento(LocalDate dataFechamento) {
+        this.dataFechamento = dataFechamento;
     }
 }

@@ -1,5 +1,6 @@
 package com.murilonerdx.helpdesk.services.impl;
 
+import com.murilonerdx.helpdesk.dto.ClienteDTO;
 import com.murilonerdx.helpdesk.dto.TecnicoDTO;
 import com.murilonerdx.helpdesk.entities.Cliente;
 import com.murilonerdx.helpdesk.entities.Pessoa;
@@ -11,6 +12,7 @@ import com.murilonerdx.helpdesk.repositories.TecnicoRepository;
 import com.murilonerdx.helpdesk.services.DAOService;
 import lombok.SneakyThrows;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -19,14 +21,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ClienteServiceImpl implements DAOService<Cliente, Integer> {
+public class ClienteServiceImpl implements DAOService<Cliente, Integer, ClienteDTO> {
 
     @Autowired
     private ClienteRepository clienteRepository;
 
     @Override
-    public Cliente create(Cliente o) {
-        return clienteRepository.save(o);
+    public Cliente create(ClienteDTO clienteDTO) {
+        Cliente cliente = new Cliente();
+        BeanUtils.copyProperties(clienteDTO, cliente);
+
+        return clienteRepository.save(cliente);
     }
 
     @SneakyThrows
@@ -46,8 +51,13 @@ public class ClienteServiceImpl implements DAOService<Cliente, Integer> {
     }
 
     @Override
-    public Cliente update(Cliente o) {
-        return clienteRepository.save(o);
+    public Cliente update(Integer id,ClienteDTO clienteDTO) {
+        Cliente cliente = clienteRepository.findById(id).get();
+
+        cliente.setEmail(clienteDTO.getEmail());
+        cliente.setNome(clienteDTO.getNome());
+
+        return clienteRepository.save(cliente);
     }
 
 }

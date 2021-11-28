@@ -35,15 +35,7 @@ public class TecnicoResource {
 
     @PostMapping()
     public ResponseEntity<TecnicoDTO> create(@RequestBody @Valid TecnicoDTO tecnicoDTO) {
-        service.validarCpf(tecnicoDTO);
-        Tecnico tecnico = new Tecnico();
-
-        tecnicoDTO.setId(null);
-        tecnicoDTO.addPerfil(Perfil.CLIENTE);
-
-        BeanUtils.copyProperties(tecnicoDTO, tecnico);
-
-        Tecnico tecnicoSaved = service.create(tecnico);
+        Tecnico tecnicoSaved = service.create(tecnicoDTO);
         TecnicoDTO tecnicoDTOSave = new TecnicoDTO(tecnicoSaved);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(tecnicoSaved.getId()).toUri();
@@ -59,12 +51,7 @@ public class TecnicoResource {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<TecnicoDTO> update(@RequestBody TecnicoDTO tecnicoDTO, @PathVariable Integer id) {
-        Tecnico tecnico = service.findById(id);
-
-        tecnico.setEmail(tecnicoDTO.getEmail());
-        tecnico.setNome(tecnicoDTO.getNome());
-
-        Tecnico tecnicoSaved = service.update(tecnico);
+        Tecnico tecnicoSaved = service.update(id, tecnicoDTO);
         TecnicoDTO tecnicoDTOSaved = new TecnicoDTO(tecnicoSaved);
 
         return ResponseEntity.ok().body(tecnicoDTOSaved);

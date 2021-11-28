@@ -34,15 +34,10 @@ public class ClienteResource {
 
     @PostMapping()
     public ResponseEntity<ClienteDTO> create(@RequestBody @Valid ClienteDTO clienteDTO) {
-
-        Cliente cliente = new Cliente();
-
         clienteDTO.setId(null);
         clienteDTO.addPerfil(Perfil.CLIENTE);
 
-        BeanUtils.copyProperties(clienteDTO, cliente);
-
-        Cliente clienteSaved = service.create(cliente);
+        Cliente clienteSaved = service.create(clienteDTO);
         ClienteDTO clienteDTOSaved = new ClienteDTO(clienteSaved);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(clienteSaved.getId()).toUri();
@@ -58,12 +53,7 @@ public class ClienteResource {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<ClienteDTO> update(@RequestBody ClienteDTO clienteDTO, @PathVariable Integer id) {
-        Cliente cliente = service.findById(id);
-
-        cliente.setEmail(clienteDTO.getEmail());
-        cliente.setNome(clienteDTO.getNome());
-
-        Cliente clienteSaved = service.update(cliente);
+        Cliente clienteSaved = service.update(id, clienteDTO);
         ClienteDTO clienteDTOSaved = new ClienteDTO(clienteSaved);
 
         return ResponseEntity.ok().body(clienteDTOSaved);
