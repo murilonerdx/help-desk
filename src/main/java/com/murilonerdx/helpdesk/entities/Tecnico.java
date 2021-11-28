@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 @Entity
 public class Tecnico extends Pessoa {
 
+
     @JsonIgnore
     @OneToMany(mappedBy = "tecnico")
     private List<Chamado> chamados = new ArrayList<>();
@@ -50,5 +51,6 @@ public class Tecnico extends Pessoa {
     public void setChamados(List<Chamado> chamados) {
         this.chamados = chamados;
     }
+
 
 }

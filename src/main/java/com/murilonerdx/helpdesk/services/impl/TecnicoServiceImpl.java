@@ -8,6 +8,7 @@ import com.murilonerdx.helpdesk.repositories.PessoaRepository;
 import com.murilonerdx.helpdesk.repositories.TecnicoRepository;
 import com.murilonerdx.helpdesk.services.DAOService;
 import lombok.SneakyThrows;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -26,13 +27,14 @@ public class TecnicoServiceImpl implements DAOService<Tecnico, Integer> {
 
     @Override
     public Tecnico create(Tecnico o) {
+        ModelMapper mapper = new ModelMapper();
         return tecnicoRepository.save(o);
     }
 
     @SneakyThrows
     @Override
     public Tecnico findById(Integer id) {
-        return tecnicoRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("ID " + id + " not found"));
+        return tecnicoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("ID " + id + " not found"));
     }
 
     @Override
@@ -50,13 +52,13 @@ public class TecnicoServiceImpl implements DAOService<Tecnico, Integer> {
         return tecnicoRepository.save(o);
     }
 
-    public Tecnico findByCpf(String cpf){
-        return tecnicoRepository.findByCpf(cpf).orElseThrow(()-> new DataIntegrityViolationException("CPF não encontrado"));
+    public Tecnico findByCpf(String cpf) {
+        return tecnicoRepository.findByCpf(cpf).orElseThrow(() -> new DataIntegrityViolationException("CPF não encontrado"));
     }
 
-    public void validarCpf(Tecnico tecnico){
+    public void validarCpf(TecnicoDTO tecnico) {
         Optional<Pessoa> obj = pessoaRepository.findByCpf(tecnico.getCpf());
-        if(obj.isPresent() && !obj.get().getId().equals(tecnico.getId()))
+        if (obj.isPresent() && !obj.get().getId().equals(tecnico.getId()))
             throw new DataIntegrityViolationException("CPF já cadastrado no sistema");
     }
 
