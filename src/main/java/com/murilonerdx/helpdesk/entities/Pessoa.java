@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.murilonerdx.helpdesk.enums.Perfil;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -22,11 +24,15 @@ public abstract class Pessoa implements Serializable {
     protected Integer id;
     protected String nome;
 
-    @Column(unique = true)
+    @CPF
+    @Column(unique = true, nullable=false)
     protected String cpf;
 
-    @Column(unique = true)
+    @Email
+    @Column(unique = true, nullable=false)
     protected String email;
+
+    @Column(nullable=false)
     protected String senha;
 
     @ElementCollection(fetch = FetchType.EAGER)
