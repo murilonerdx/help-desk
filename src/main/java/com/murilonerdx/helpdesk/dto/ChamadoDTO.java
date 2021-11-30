@@ -2,12 +2,7 @@ package com.murilonerdx.helpdesk.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.murilonerdx.helpdesk.entities.Chamado;
-import com.murilonerdx.helpdesk.entities.Cliente;
-import com.murilonerdx.helpdesk.entities.Tecnico;
-import com.murilonerdx.helpdesk.enums.Prioridade;
-import com.murilonerdx.helpdesk.enums.Status;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;

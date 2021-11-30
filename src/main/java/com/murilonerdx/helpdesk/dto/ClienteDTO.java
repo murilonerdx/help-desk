@@ -3,13 +3,8 @@ package com.murilonerdx.helpdesk.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.murilonerdx.helpdesk.entities.Cliente;
 import com.murilonerdx.helpdesk.enums.Perfil;
-import lombok.Data;
 import org.hibernate.validator.constraints.br.CPF;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.FetchType;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;

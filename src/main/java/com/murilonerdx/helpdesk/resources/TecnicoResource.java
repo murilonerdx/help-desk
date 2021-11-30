@@ -3,13 +3,10 @@ package com.murilonerdx.helpdesk.resources;
 
 import com.murilonerdx.helpdesk.dto.TecnicoDTO;
 import com.murilonerdx.helpdesk.entities.Tecnico;
-import com.murilonerdx.helpdesk.enums.Perfil;
 import com.murilonerdx.helpdesk.services.impl.TecnicoServiceImpl;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.ServletRequestBindingException;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 

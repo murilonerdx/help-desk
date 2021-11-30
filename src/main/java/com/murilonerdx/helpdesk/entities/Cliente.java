@@ -3,19 +3,17 @@ package com.murilonerdx.helpdesk.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.murilonerdx.helpdesk.dto.ClienteDTO;
 import com.murilonerdx.helpdesk.enums.Perfil;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Entity
-public class Cliente extends Pessoa {
+public class Cliente extends Pessoa implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "cliente")
@@ -50,4 +48,17 @@ public class Cliente extends Pessoa {
         this.chamados = chamados;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Cliente cliente = (Cliente) o;
+        return Objects.equals(chamados, cliente.chamados);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), chamados);
+    }
 }

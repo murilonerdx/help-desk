@@ -8,7 +8,6 @@ import com.murilonerdx.helpdesk.enums.Prioridade;
 import com.murilonerdx.helpdesk.enums.Status;
 import com.murilonerdx.helpdesk.exception.ResourceNotFoundException;
 import com.murilonerdx.helpdesk.repositories.ChamadoRepository;
-import com.murilonerdx.helpdesk.repositories.ClienteRepository;
 import com.murilonerdx.helpdesk.services.DAOService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;

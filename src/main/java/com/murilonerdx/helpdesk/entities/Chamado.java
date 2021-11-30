@@ -3,12 +3,11 @@ package com.murilonerdx.helpdesk.entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.murilonerdx.helpdesk.enums.Prioridade;
 import com.murilonerdx.helpdesk.enums.Status;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 public class Chamado implements Serializable {
@@ -119,5 +118,18 @@ public class Chamado implements Serializable {
 
     public void setDataFechamento(LocalDate dataFechamento) {
         this.dataFechamento = dataFechamento;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Chamado chamado = (Chamado) o;
+        return Objects.equals(id, chamado.id) && Objects.equals(dataAbertura, chamado.dataAbertura) && Objects.equals(dataFechamento, chamado.dataFechamento) && prioridade == chamado.prioridade && status == chamado.status && Objects.equals(titulo, chamado.titulo) && Objects.equals(observacoes, chamado.observacoes) && Objects.equals(tecnico, chamado.tecnico) && Objects.equals(cliente, chamado.cliente);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, dataAbertura, dataFechamento, prioridade, status, titulo, observacoes, tecnico, cliente);
     }
 }

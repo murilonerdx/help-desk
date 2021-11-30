@@ -2,18 +2,10 @@ package com.murilonerdx.helpdesk.resources;
 
 
 import com.murilonerdx.helpdesk.dto.ChamadoDTO;
-import com.murilonerdx.helpdesk.dto.TecnicoDTO;
 import com.murilonerdx.helpdesk.entities.Chamado;
-import com.murilonerdx.helpdesk.entities.Cliente;
-import com.murilonerdx.helpdesk.entities.Tecnico;
-import com.murilonerdx.helpdesk.enums.Perfil;
-import com.murilonerdx.helpdesk.enums.Prioridade;
-import com.murilonerdx.helpdesk.enums.Status;
 import com.murilonerdx.helpdesk.services.impl.ChamadoServiceImpl;
-import com.murilonerdx.helpdesk.services.impl.ClienteServiceImpl;
-import com.murilonerdx.helpdesk.services.impl.TecnicoServiceImpl;
+
 import lombok.SneakyThrows;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +13,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 

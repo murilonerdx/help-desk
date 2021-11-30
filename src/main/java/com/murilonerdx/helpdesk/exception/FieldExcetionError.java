@@ -1,7 +1,5 @@
 package com.murilonerdx.helpdesk.exception;
 
-import org.springframework.validation.BindingResult;
-
 import java.io.Serializable;
 import java.util.*;
 

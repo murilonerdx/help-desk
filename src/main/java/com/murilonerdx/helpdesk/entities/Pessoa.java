@@ -2,16 +2,13 @@ package com.murilonerdx.helpdesk.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.murilonerdx.helpdesk.enums.Perfil;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.br.CPF;
+import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -108,6 +105,17 @@ public abstract class Pessoa implements Serializable {
         this.dataCriacao = dataCriacao;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pessoa pessoa = (Pessoa) o;
+        return Objects.equals(id, pessoa.id) && Objects.equals(nome, pessoa.nome) && Objects.equals(cpf, pessoa.cpf) && Objects.equals(email, pessoa.email) && Objects.equals(senha, pessoa.senha) && Objects.equals(perfis, pessoa.perfis) && Objects.equals(dataCriacao, pessoa.dataCriacao);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, cpf, email, senha, perfis, dataCriacao);
+    }
 }
 

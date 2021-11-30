@@ -3,17 +3,21 @@ package com.murilonerdx.helpdesk.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.murilonerdx.helpdesk.dto.TecnicoDTO;
 import com.murilonerdx.helpdesk.enums.Perfil;
+import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Entity
-public class Tecnico extends Pessoa {
-
+public class Tecnico extends Pessoa implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @JsonIgnore
     @OneToMany(mappedBy = "tecnico")
@@ -48,5 +52,16 @@ public class Tecnico extends Pessoa {
         this.chamados = chamados;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tecnico tecnico = (Tecnico) o;
+        return Objects.equals(chamados, tecnico.chamados);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(chamados);
+    }
 }

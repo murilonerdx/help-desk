@@ -9,7 +9,6 @@ import com.murilonerdx.helpdesk.repositories.PessoaRepository;
 import com.murilonerdx.helpdesk.repositories.TecnicoRepository;
 import com.murilonerdx.helpdesk.services.DAOService;
 import lombok.SneakyThrows;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;

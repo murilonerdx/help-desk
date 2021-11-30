@@ -3,10 +3,8 @@ package com.murilonerdx.helpdesk.resources;
 
 import com.murilonerdx.helpdesk.dto.ClienteDTO;
 import com.murilonerdx.helpdesk.entities.Cliente;
-import com.murilonerdx.helpdesk.entities.Tecnico;
 import com.murilonerdx.helpdesk.enums.Perfil;
 import com.murilonerdx.helpdesk.services.impl.ClienteServiceImpl;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

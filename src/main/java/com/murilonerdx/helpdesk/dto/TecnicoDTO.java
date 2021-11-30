@@ -6,9 +6,6 @@ import com.murilonerdx.helpdesk.enums.Perfil;
 import lombok.Data;
 import org.hibernate.validator.constraints.br.CPF;
 
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.HashSet;
