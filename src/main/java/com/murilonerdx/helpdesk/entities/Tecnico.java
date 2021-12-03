@@ -6,6 +6,7 @@ import com.murilonerdx.helpdesk.enums.Perfil;
 import lombok.Data;
 import lombok.ToString;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -20,7 +21,7 @@ public class Tecnico extends Pessoa implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "tecnico")
+    @OneToMany(mappedBy = "tecnico", cascade = CascadeType.ALL)
     private List<Chamado> chamados = new ArrayList<>();
 
     public Tecnico() {
@@ -34,14 +35,12 @@ public class Tecnico extends Pessoa implements Serializable {
     }
 
     public Tecnico(TecnicoDTO obj) {
-        super();
-        this.id = obj.getId();
-        this.nome = obj.getNome();
-        this.cpf = obj.getCpf();
-        this.email = obj.getEmail();
-        this.senha = obj.getSenha();
-        this.perfis = obj.getPerfis().stream().map(Perfil::getCode).collect(Collectors.toSet());
-        this.dataCriacao = obj.getDataCriacao();
+        super(obj.getId(),
+                obj.getNome(),
+                obj.getCpf(),
+                obj.getEmail(),
+                obj.getSenha());
+
     }
 
     public List<Chamado> getChamados() {

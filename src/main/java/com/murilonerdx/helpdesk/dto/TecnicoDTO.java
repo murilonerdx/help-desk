@@ -1,6 +1,7 @@
 package com.murilonerdx.helpdesk.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.murilonerdx.helpdesk.entities.Tecnico;
 import com.murilonerdx.helpdesk.enums.Perfil;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class TecnicoDTO {
     @NotNull(message = "O campo EMAIL é requerido")
     protected String email;
     @NotNull(message = "O campo SENHA é requerido")
+    @JsonIgnore
     protected String senha;
     protected Set<Integer> perfis = new HashSet<>();
 

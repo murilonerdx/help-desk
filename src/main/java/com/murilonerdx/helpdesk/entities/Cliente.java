@@ -2,9 +2,12 @@ package com.murilonerdx.helpdesk.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.murilonerdx.helpdesk.dto.ClienteDTO;
+import com.murilonerdx.helpdesk.dto.TecnicoDTO;
 import com.murilonerdx.helpdesk.enums.Perfil;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,7 +19,7 @@ import java.util.stream.Collectors;
 public class Cliente extends Pessoa implements Serializable {
 
     @JsonIgnore
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy= "cliente",cascade = CascadeType.ALL)
     private List<Chamado> chamados = new ArrayList<>();
 
     public Cliente() {
@@ -30,14 +33,12 @@ public class Cliente extends Pessoa implements Serializable {
     }
 
     public Cliente(ClienteDTO obj) {
-        super();
-        this.id = obj.getId();
-        this.nome = obj.getNome();
-        this.cpf = obj.getCpf();
-        this.email = obj.getEmail();
-        this.senha = obj.getSenha();
-        this.perfis = obj.getPerfis().stream().map(Perfil::getCode).collect(Collectors.toSet());
-        this.dataCriacao = obj.getDataCriacao();
+        super(obj.getId(),
+                obj.getNome(),
+                obj.getCpf(),
+                obj.getEmail(),
+                obj.getSenha());
+
     }
 
     public List<Chamado> getChamados() {

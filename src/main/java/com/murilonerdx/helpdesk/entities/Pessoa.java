@@ -14,25 +14,25 @@ import java.util.stream.Collectors;
 
 
 @Entity
-public abstract class Pessoa implements Serializable {
+public class Pessoa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Integer id;
-    protected String nome;
+    private Integer id;
+    private String nome;
 
     @Column(unique = true)
-    protected String cpf;
+    private String cpf;
 
     @Column(unique = true)
-    protected String email;
-    protected String senha;
+    private String email;
+    private String senha;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "PERFIS")
-    protected Set<Integer> perfis = new HashSet<>();
+    private Set<Integer> perfis = new HashSet<>();
 
     @JsonFormat(pattern = "dd/MM/yyyy")
-    protected LocalDate dataCriacao = LocalDate.now();
+    private LocalDate dataCriacao = LocalDate.now();
 
     public Pessoa() {
         super();
@@ -48,6 +48,7 @@ public abstract class Pessoa implements Serializable {
         this.senha = senha;
         addPerfil(Perfil.CLIENTE);
     }
+
 
     public Integer getId() {
         return id;

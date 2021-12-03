@@ -7,6 +7,7 @@ import com.murilonerdx.helpdesk.services.impl.TecnicoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -46,7 +47,8 @@ public class TecnicoResource {
         return ResponseEntity.ok().body(tecnicosDTO);
     }
 
-    @PutMapping("/update/{id}")
+    @PreAuthorize("hasAnyRole('TECNICO')" + " && " + "hasAnyRole('ADMIN')")
+    @PutMapping("/{id}")
     public ResponseEntity<TecnicoDTO> update(@RequestBody TecnicoDTO tecnicoDTO, @PathVariable Integer id) {
         Tecnico tecnicoSaved = service.update(id, tecnicoDTO);
         TecnicoDTO tecnicoDTOSaved = new TecnicoDTO(tecnicoSaved);
@@ -54,7 +56,8 @@ public class TecnicoResource {
         return ResponseEntity.ok().body(tecnicoDTOSaved);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.remove(id);
 

@@ -7,6 +7,7 @@ import com.murilonerdx.helpdesk.enums.Perfil;
 import com.murilonerdx.helpdesk.services.impl.ClienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -49,7 +50,8 @@ public class ClienteResource {
         return ResponseEntity.ok().body(clientesDTO);
     }
 
-    @PutMapping("/update/{id}")
+    @PreAuthorize("hasAnyRole('TECNICO')" + " && " + "hasAnyRole('ADMIN')")
+    @PutMapping("/{id}")
     public ResponseEntity<ClienteDTO> update(@RequestBody ClienteDTO clienteDTO, @PathVariable Integer id) {
         Cliente clienteSaved = service.update(id, clienteDTO);
         ClienteDTO clienteDTOSaved = new ClienteDTO(clienteSaved);
@@ -57,7 +59,8 @@ public class ClienteResource {
         return ResponseEntity.ok().body(clienteDTOSaved);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.remove(id);
 

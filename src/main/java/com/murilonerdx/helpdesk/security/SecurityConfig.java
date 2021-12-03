@@ -22,7 +22,7 @@ import java.util.Arrays;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String[] PUBLIC_MATCHERS = { "/h2-console/**","/auth" };
+    private static final String[] PUBLIC_MATCHERS = { "/h2-console/**"};
 
     @Autowired
     private Environment env;
@@ -41,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
         http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
         http.authorizeRequests().antMatchers(PUBLIC_MATCHERS).permitAll().anyRequest().authenticated();
+        http.headers().httpStrictTransportSecurity().disable();
 
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
