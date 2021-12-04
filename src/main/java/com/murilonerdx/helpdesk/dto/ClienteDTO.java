@@ -23,7 +23,6 @@ public class ClienteDTO implements Serializable {
     protected String cpf;
     @NotNull(message = "O campo EMAIL é requerido")
     protected String email;
-    @JsonIgnore
     @NotNull(message = "O campo SENHA é requerido")
     protected String senha;
     protected Set<Integer> perfis = new HashSet<>();

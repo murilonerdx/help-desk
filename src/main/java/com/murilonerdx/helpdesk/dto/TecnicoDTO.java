@@ -24,7 +24,6 @@ public class TecnicoDTO {
     @NotNull(message = "O campo EMAIL é requerido")
     protected String email;
     @NotNull(message = "O campo SENHA é requerido")
-    @JsonIgnore
     protected String senha;
     protected Set<Integer> perfis = new HashSet<>();
 
